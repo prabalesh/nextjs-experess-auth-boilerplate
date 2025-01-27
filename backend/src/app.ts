@@ -11,7 +11,9 @@ import { config } from "./config/config";
 const app = express();
 
 // Initialize client.
-let redisClient = createClient();
+let redisClient = createClient({
+    url: config.REDIS_URI,
+});
 redisClient.connect().catch(console.error);
 
 // Initialize store.
