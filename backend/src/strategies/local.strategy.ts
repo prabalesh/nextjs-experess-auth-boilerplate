@@ -15,17 +15,16 @@ export function createLocalStrategy(db: any) {
                     where: eq(users.email, email),
                 });
 
-                if (!user) {
-                    return done(null, false, { message: "Incorrect email." });
+                let isMatch = false;
+                if (user) {
+                    isMatch = await bcrypt.compare(
+                        password,
+                        user.password || ""
+                    );
                 }
-
-                const isMatch = await bcrypt.compare(
-                    password,
-                    user.password || ""
-                );
                 if (!isMatch) {
                     return done(null, false, {
-                        message: "Incorrect password.",
+                        message: "Incorrect credentials.",
                     });
                 }
 
