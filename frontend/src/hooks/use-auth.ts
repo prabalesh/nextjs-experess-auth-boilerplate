@@ -86,6 +86,10 @@ export function useAuth() {
     };
 
     return {
+        isLoading:
+            loginMutation.isPending ||
+            logoutMutation.isPending ||
+            registerMutation.isPending,
         getUser,
         registerWithEmail,
         loginWithEmail,
