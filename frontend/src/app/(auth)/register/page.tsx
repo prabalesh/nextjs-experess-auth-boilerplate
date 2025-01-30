@@ -6,14 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AuthProviders from "@/components/auth/auth-provider";
 import { MotionDiv } from "@/components/motion/motion-div";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function LoginPage() {
+    const { registerWithEmail } = useAuth();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleEmailRegister = async (e: React.FormEvent) => {
         e.preventDefault();
+        await registerWithEmail(name, email, password);
     };
 
     return (

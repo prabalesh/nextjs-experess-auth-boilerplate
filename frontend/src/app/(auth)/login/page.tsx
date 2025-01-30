@@ -5,13 +5,17 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AuthProviders from "@/components/auth/auth-provider";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function LoginPage() {
+    const { loginWithEmail } = useAuth();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleEmailLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        await loginWithEmail(email, password);
     };
 
     return (
@@ -70,7 +74,7 @@ export default function LoginPage() {
                     transition={{ delay: 0.2 }}
                     className="text-center text-sm text-muted-foreground"
                 >
-                    Don't have an account?{" "}
+                    Don&apos;t have an account?{" "}
                     <a
                         href="/register"
                         className="text-primary hover:underline"

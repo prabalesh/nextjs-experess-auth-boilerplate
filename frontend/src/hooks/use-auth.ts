@@ -34,7 +34,8 @@ export function useAuth() {
 
     const loginMutation = useMutation({
         mutationFn: authService.login,
-        onSuccess: () => {
+        onSuccess: (userData) => {
+            setUser(userData);
             toast.success("Login successful");
             router.push("/");
         },

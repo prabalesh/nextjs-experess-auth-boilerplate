@@ -6,8 +6,12 @@ import { ModeToggle } from "@/components/theme/theme-mode-toggle";
 import { NavLinks } from "@/components/layout/nav-links";
 import { UserActions } from "@/components/layout/user-actions";
 import { AuthActions } from "@/components/layout/auth-actions";
+import { useAuthStore } from "@/stores/auth-store";
+import Spinner from "../Spinner";
 
 export function Header() {
+    const { isAuthenticated, isLoading } = useAuthStore();
+
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-14 max-w-screen-2xl items-center justify-between pl-4">
@@ -25,8 +29,19 @@ export function Header() {
 
                 <div className="flex items-center gap-4">
                     <ModeToggle />
-                    <UserActions />
-                    <AuthActions />
+                    {isLoading ? (
+                        <div className="flex items-center justify-center">
+                            <Spinner />
+                        </div>
+                    ) : (
+                        <>
+                            {isAuthenticated ? (
+                                <UserActions />
+                            ) : (
+                                <AuthActions />
+                            )}
+                        </>
+                    )}
                 </div>
             </div>
         </header>

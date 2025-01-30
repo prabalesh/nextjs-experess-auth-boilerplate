@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { GoogleIcon, GithubIcon } from "@/components/icons";
 import { useAuth } from "@/hooks/use-auth";
 import useMounted from "@/hooks/use-mounted";
-import AuthProviderSkeleton from "./auth-provider-skeletion";
+import AuthProviderSkeleton from "@/components/auth/auth-provider-skeletion";
 
 function AuthProviders() {
     const { mounted } = useMounted();
